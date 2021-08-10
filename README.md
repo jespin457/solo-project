@@ -1,2 +1,2 @@
 # solo-project
-Music recommending profile
+Application for users to create music recommendations
