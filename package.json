@@ -1,0 +1,25 @@
+{
+  "name": "solo-project",
+  "version": "1.0.0",
+  "description": "Application for users to create music recommendations",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jespin457/solo-project.git"
+  },
+  "author": "Jorge Espinoza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jespin457/solo-project/issues"
+  },
+  "homepage": "https://github.com/jespin457/solo-project#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0"
+  }
+}

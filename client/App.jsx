@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router';
 
 import './styles.css';
 
-const App = props => {
-  return (
-    <div className="">
-      <button>Click me!</button>
-    </div>
-  );
-};
+class App extends Component {
+  constructor(props) {
+    super(props)
 
-export default App;
+
+  }
+
+  render() {
+    return (
+      <div>
+        <p>SHOW UP DAMN YOU</p>
+      </div>
+    );
+  };
+}
