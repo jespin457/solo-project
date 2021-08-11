@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div>
         <input type="text"></input>
-        <button>Click Me!</button>
+        <button>Click Me PLS!</button>
         <p>This is from App!</p>
         <Users />
       </div>
