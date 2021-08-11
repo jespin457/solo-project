@@ -47,4 +47,8 @@ router.post('/addSong', appController.addSong, (req, res) => {
   return res.status(200).set('Content-Type', 'json/application').json(res.locals.added);
 });
 
+router.get('/getSongs', appController.getSongs, (req, res) => {
+  return res.status(200).set('Content-Type', 'json/application').json(res.locals.songs);
+});
+
 module.exports = router;

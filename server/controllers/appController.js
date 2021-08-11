@@ -150,7 +150,7 @@ appController.deleteRating = (req, res, next) => {
 /*Should occur when the user logs in. Will retrieve all ratings that have
 userid matched up with the user's _id.*/
 appController.getUserRatings = (req, res, next) => {
-  const query = `SELECT users._id, users.username, ratings._id AS rating_id, ratings.rating AS your_Rating, songs.title AS song_title
+  const query = `SELECT users._id, users.username, ratings._id AS rating_id, ratings.rating AS your_Rating, songs.title AS song_title, songs.artist AS artist
   FROM users
   LEFT OUTER JOIN ratings ON ratings.userid = users._id
   LEFT OUTER JOIN songs ON songs._id = songid
@@ -201,7 +201,21 @@ appController.addSong = (req, res, next) => {
 /*Should occur after login. Will catalog to the user all
 songs availble for rating.*/
 appController.getSongs = (req, res, next) => {
+  const query = `SELECT * FROM songs`
 
+  async function retrSongs() {
+    await db.query(query, null, (err, queryRes) => {
+      if (err) {
+        console.log('Error occured within getSongs!');
+        return next(err);
+      }
+
+      res.locals.songs = queryRes.rows; //returns array of song objects
+      return next();
+    });
+  }
+
+  retrSongs();
 }
 
 module.exports = appController;
