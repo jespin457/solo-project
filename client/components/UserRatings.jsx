@@ -8,12 +8,6 @@ class UserRatings extends Component {
     this.state = {
       ratingCards: [
       <RatingCard
-      songTitle = "Song Title"
-      artist = "Artist"
-      rating = "Your Rating"
-      ratingId = "Rating ID"
-      />,
-      <RatingCard
       songTitle = "The Worst Guys"
       artist = "Childish Gambino"
       rating = "3"
@@ -26,6 +20,14 @@ class UserRatings extends Component {
   render() {
     return (
       <div>
+        <u>
+        <RatingCard
+          songTitle = "Song Title"
+          artist = "Artist"
+          rating = "Your Rating"
+          ratingId = "Rating ID"
+        />
+        </u>
         {this.state.ratingCards}
       </div>
     );

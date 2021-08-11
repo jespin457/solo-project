@@ -19,6 +19,11 @@ module.exports = {
           }
         }
       },
+      {
+        test: /\.s[ac]ss$/i,
+        exclude: path.resolve(__dirname, './node_modules/'),
+        use: ["style-loader", "css-loader", "sass-loader"],
+      }
     ]
   },
   devServer: {

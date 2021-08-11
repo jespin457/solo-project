@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import SongCard from './SongCard.jsx'
+import UserRatings from './UserRatings.jsx';
 
 class DisplaySongs extends Component {
   constructor(props) {
@@ -8,16 +9,9 @@ class DisplaySongs extends Component {
     this.state = {
       songCards: [
       <SongCard
-      songId = "Song ID"
-      songTitle = "Song Title"
-      artist = "Artist"
-      releaseYear = "Release Year"
-      />,
-      <SongCard
-      songId = "N/A"
       songTitle = "Since I've Been Loving You"
       artist = "Led Zeppelin"
-      releaseYear = "1970"
+      songId = "N/A"
       />,
       ],
     }
@@ -26,6 +20,13 @@ class DisplaySongs extends Component {
   render() {
     return (
       <div>
+        <u>
+        <SongCard
+          songTitle = "Song Title"
+          artist = "Artist"
+          songId = "Song ID"
+        />
+        </u>
         {this.state.songCards}
       </div>
     );

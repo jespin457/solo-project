@@ -8,7 +8,7 @@ class SongCard extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.songId} | {this.props.songTitle} | {this.props.artist} | {this.props.releaseYear}</p>
+        <p>{this.props.songTitle} | {this.props.artist} | {this.props.songId}</p>
       </div>
     );
   }
