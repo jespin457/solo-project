@@ -16,7 +16,7 @@ app.use('/api', apiRouter);
 In order to properly serve the build while using webpack-dev-server, it seems
 as though this app.get to '/' MUST remain here within server.js...
 which is fine I guess! Thus, any calls to update the data base (CRUD) can be made
-via app.use('/api'). However, that does pose the question: how to trigger
+via app.use('/api'). However, that does raise the question: how to trigger
 components within React to update when making api calls?
  */
 app.get('/', (req, res) => {

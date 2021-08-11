@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-// import { Switch, Route } from 'react-router';
 
-import Users from './components/Users.jsx';
+import UserSignin from './components/UserSignin.jsx';
+import EditRatings from './components/EditRatings.jsx';
+import UserRatings from './components/UserRatings.jsx'
 
 class App extends Component {
   constructor(props) {
     super(props)
-
-
   }
 
   render() {
     return (
       <div>
-        <h1>Music Ratings and Reccommendations</h1>
-        <Users />
+        <h1>Music Ratings</h1>
+        <UserSignin />
+        <UserRatings/>
+        <EditRatings />
       </div>
     );
   };

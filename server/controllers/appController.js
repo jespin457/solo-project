@@ -4,6 +4,7 @@ const appController = {};
 
 // USER MIDDLEWARE
 
+/*Registers users on the main page*/
 appController.addUser = (req, res, next) => {
   const query = `INSERT INTO users (username, email)
   VALUES ($1, $2) RETURNING *`
@@ -25,6 +26,7 @@ appController.addUser = (req, res, next) => {
   insertUser();
 }
 
+/*Signs users in if their credentials are within the database*/
 appController.loginUser = (req, res, next) => {
   const query = `SELECT * FROM users
   WHERE username = $1 AND email = $2`
@@ -42,7 +44,7 @@ appController.loginUser = (req, res, next) => {
         res.locals.loginStatus = 
         {
           userFound : true,
-          _id : queryRes.rows[0]._id,
+          _id : queryRes.rows[0]._id, //we retrieve the user_id here! Be aware of this!
           username : queryRes.rows[0].username,
           email : queryRes.rows[0].email,
         } 
@@ -59,6 +61,9 @@ appController.loginUser = (req, res, next) => {
 
 // RATING MIDDLEWARE
 
+/*Adds a rating with the user's id attached. Should only be accessible
+if the user is already signed in. In all likelihood, we will keep the
+user's _id within a cookie.*/
 appController.addRating = (req, res, next) => {
   const query = `INSERT INTO ratings (rating, userId, songId)
   VALUES ($1, $2, $3) RETURNING *`
@@ -79,12 +84,11 @@ appController.addRating = (req, res, next) => {
   insertRating();
 }
 
+/*Updates a rating that has been selected by the user. The simplest
+implementation is just to allow the user to see all their ratings along
+with the associated rating_id. That way it's up to them to select which
+rating to update.*/
 appController.updateRating = (req, res, next) => {
-  // const query = `SELECT users._id, users.username, ratings._id AS ratingid, ratings.rating AS rating, songs.title AS title
-  // FROM users
-  // LEFT OUTER JOIN ratings ON ratings.userid = users._id
-  // LEFT OUTER JOIN songs ON songs._id = songid
-  // WHERE _id = $1 AND ratingid = $2`
   const query = `UPDATE ratings
   SET rating = $1
   WHERE _id = $2
@@ -113,6 +117,8 @@ appController.updateRating = (req, res, next) => {
   patchRating();
 }
 
+/*Should work very similarly to addRating. The user will specify which
+rating_id it is they would like to delete.*/
 appController.deleteRating = (req, res, next) => {
   const query = `DELETE FROM ratings
   WHERE _id = $1
@@ -141,13 +147,37 @@ appController.deleteRating = (req, res, next) => {
   removeRating();
 }
 
+/*Should occur when the user logs in. Will retrieve all ratings that have
+userid matched up with the user's _id.*/
 appController.getUserRatings = (req, res, next) => {
+  const query = `SELECT users._id, users.username, ratings._id AS rating_id, ratings.rating AS your_Rating, songs.title AS song_title
+  FROM users
+  LEFT OUTER JOIN ratings ON ratings.userid = users._id
+  LEFT OUTER JOIN songs ON songs._id = songid
+  WHERE users._id = $1`
 
-  return next();
+  const values = [req.body.userId]; //will probably store user _id inside a cookie for easy access
+
+  async function getMyRatings() {
+    await db.query(query, values, (err, queryRes) => {
+      if (err) {
+        console.log('Error occured within getUserRatings!');
+        return next(err);
+      }
+
+      res.locals.myRatings = queryRes.rows;
+      return next();
+    });
+  }
+  
+  getMyRatings();
 }
 
 // SONG MIDDLEWARE
 
+/*Should only accessible to users that are already logged in.
+No need to access cookies here--we're making a whole new song to rate,
+after all.*/
 appController.addSong = (req, res, next) => {
   const query = `INSERT INTO songs (title, artist, releaseYear)
   VALUES ($1, $2, $3) RETURNING *`
@@ -168,6 +198,8 @@ appController.addSong = (req, res, next) => {
   insertSong();
 }
 
+/*Should occur after login. Will catalog to the user all
+songs availble for rating.*/
 appController.getSongs = (req, res, next) => {
 
 }
