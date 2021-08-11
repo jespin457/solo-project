@@ -8,7 +8,12 @@ class Users extends Component {
   render() {
     return (
       <div>
-        <p>This is from Users!!!!???</p>
+        <h3>Enter your Username and Email!</h3>
+        <input type="text" id="username"></input>
+        <input type="text" id="email"></input>
+        <button>Sign In!</button> 
+        {/* Functionality: when clicking "Sign In!", it should be that the text boxes are 
+          replaced with plain text that displays the signed-in user's username and email*/}
       </div>
     );
   }

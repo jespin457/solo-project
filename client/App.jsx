@@ -13,9 +13,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <input type="text"></input>
-        <button>Click Me PLS!</button>
-        <p>This is from App!</p>
+        <h1>Music Ratings and Reccommendations</h1>
         <Users />
       </div>
     );
