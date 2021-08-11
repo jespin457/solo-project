@@ -9,8 +9,8 @@ class UserSignin extends Component {
     return (
       <div>
         <h3>Enter your Username and Email!</h3>
-        <input type="text" id="username"></input>
-        <input type="text" id="email"></input>
+        <input type="text" id="username" placeholder="Username"></input>
+        <input type="text" id="email" placeholder="Email"></input>
         <button>Sign In!</button> 
         {/* Functionality: when clicking "Sign In!", it should be that the text boxes are 
           replaced with plain text that displays the signed-in user's username and email*/}

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import DisplaySongs from './DisplaySongs.jsx';
+import UserRatings from './UserRatings.jsx';
+
 class EditRatings extends Component {
   constructor(props) {
     super(props);
@@ -8,15 +11,19 @@ class EditRatings extends Component {
   render() {
     return (
       <div>
+        <DisplaySongs />
         <h4>Add a new rating!</h4>
-        <input type="text" id="rating"></input>
-        <input type="text" id="songId"></input>
-        <button>Submit Rating!</button> 
+        <input type="text" id="rating" placeholder="Rating"></input>
+        <input type="text" id="songId" placeholder="Song ID"></input>
+        <button id="submitRating">Submit Rating</button> 
         <br></br>
+        <br></br>
+        <br></br>
+        <UserRatings />
         <h4>Update one of your ratings!</h4>
-        <input type="text" id="newRating"></input>
-        <input type="text" id="ratingId"></input>
-        <button>Update Rating!</button> 
+        <input type="text" id="newRating" placeholder="New Rating"></input>
+        <input type="text" id="ratingId" placeholder="Rating ID"></input>
+        <button id="updateRating">Update Rating</button> 
         {/* Functionality: when clicking "Sign In!", it should be that the text boxes are 
           replaced with plain text that displays the signed-in user's username and email*/}
       </div>

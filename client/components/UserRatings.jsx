@@ -8,14 +8,12 @@ class UserRatings extends Component {
     this.state = {
       ratingCards: [
       <RatingCard
-      username = "Username"
       songTitle = "Song Title"
       artist = "Artist"
       rating = "Your Rating"
       ratingId = "Rating ID"
       />,
       <RatingCard
-      username = "jespin457"
       songTitle = "The Worst Guys"
       artist = "Childish Gambino"
       rating = "3"

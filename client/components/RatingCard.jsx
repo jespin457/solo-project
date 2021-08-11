@@ -8,7 +8,7 @@ class RatingCard extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.username} | {this.props.songTitle} | {this.props.artist} | {this.props.rating} | {this.props.ratingId}</p>
+        <p>{this.props.songTitle} | {this.props.artist} | {this.props.rating} | {this.props.ratingId}</p>
       </div>
     );
   }
