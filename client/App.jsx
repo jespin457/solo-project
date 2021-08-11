@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 
 import Users from './components/Users.jsx';
 
-import './styles.css';
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -15,6 +13,8 @@ class App extends Component {
   render() {
     return (
       <div>
+        <input type="text"></input>
+        <button>Click Me!</button>
         <p>This is from App!</p>
         <Users />
       </div>
