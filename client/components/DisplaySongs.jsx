@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 
 import SongCard from './SongCard.jsx'
-import UserRatings from './UserRatings.jsx';
 
 class DisplaySongs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       songCards: [
-      <SongCard
-      songTitle = "Since I've Been Loving You"
-      artist = "Led Zeppelin"
-      songId = "N/A"
-      />,
       ],
     }
+  }
+
+  componentDidUpdate() {
+    console.log("saw update from DisplaySongs.jsx!");
   }
 
   render() {

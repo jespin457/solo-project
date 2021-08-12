@@ -6,12 +6,13 @@ import UserRatings from './UserRatings.jsx';
 class EditRatings extends Component {
   constructor(props) {
     super(props);
+
   }
 
   render() {
     return (
       <div>
-        <DisplaySongs />
+        {/* <DisplaySongs /> */}
         <h4>Add a rating</h4>
         <input type="text" id="rating" placeholder="Rating"></input>
         <input type="text" id="songId" placeholder="Song ID"></input>
@@ -24,7 +25,7 @@ class EditRatings extends Component {
         <br></br>
         <br></br>
         <br></br>
-        <UserRatings />
+        {/* <UserRatings /> */}
         <h4>Update one of your ratings</h4>
         <input type="text" id="newRating" placeholder="New Rating"></input>
         <input type="text" id="ratingId" placeholder="Rating ID"></input>
@@ -39,4 +40,4 @@ class EditRatings extends Component {
   }
 }
 
-export default EditRatings;
+// export default EditRatings;

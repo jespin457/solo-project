@@ -47,7 +47,9 @@ appController.loginUser = (req, res, next) => {
           _id : queryRes.rows[0]._id, //we retrieve the user_id here! Be aware of this!
           username : queryRes.rows[0].username,
           email : queryRes.rows[0].email,
-        } 
+        }
+
+        res.cookie('userId', JSON.stringify(res.locals.loginStatus._id), { expires: new Date(Date.now() + 900000)});
         return next();
       };
 

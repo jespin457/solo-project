@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 
 import UserSignin from './components/UserSignin.jsx';
-import EditRatings from './components/EditRatings.jsx';
+// import EditRatings from './components/EditRatings.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props)
+  }
+
+  componentDidUpdate() {
+    console.log('logging from App.jsx, Line 12!');
   }
 
   render() {
@@ -13,9 +17,9 @@ class App extends Component {
       <div>
         <h1>Music Ratings</h1>
         <UserSignin />
-        <br></br>
+        {/* <br></br>
         <hr></hr>
-        <EditRatings />
+        <EditRatings /> */}
       </div>
     );
   };

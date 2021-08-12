@@ -37,7 +37,7 @@ router.delete('/deleteRating', appController.deleteRating, (req, res) => {
   return res.status(200).set('Content-Type', 'json/application').json(res.locals.deleteStatus);
 });
 
-router.get('/getUserRatings', appController.getUserRatings, (req, res) => {
+router.post('/getUserRatings', appController.getUserRatings, (req, res) => {
   return res.status(200).set('Content-Type', 'json/application').json(res.locals.myRatings);
 });
 
