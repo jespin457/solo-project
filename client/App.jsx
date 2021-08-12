@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Music Ratings</h1>
+        <h1>Rate <s>Your</s> <b>My</b> Music</h1>
         <UserSignin />
         {/* <br></br>
         <hr></hr>

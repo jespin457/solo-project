@@ -8,9 +8,9 @@ class SongCard extends Component {
   render() {
     return (
       <tr>
-        <th>{this.props.songTitle}</th>
-        <th>{this.props.artist}</th>
-        <th>{this.props.songId}</th>
+        <td>{this.props.songTitle}</td>
+        <td>{this.props.artist}</td>
+        <td>{this.props.songId}</td>
       </tr>
     );
   }

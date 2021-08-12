@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import Button from 'react-bootstrap/Button'
+import Table from 'react-bootstrap/Table'
+import Card from 'react-bootstrap/Card'
+
 import SongCard from './SongCard.jsx'
 import RatingCard from './RatingCard.jsx'
 
@@ -31,7 +35,7 @@ class UserSignin extends Component {
   }
 
   componentDidUpdate() {
-    console.log('we updated!');
+    console.log('we updated! let\'s see user_id: ', this.state.user_id);
     if (this.state.user_id && !this.state.retrievedLatestSongs) {
       this.getSongList();
     }
@@ -54,7 +58,8 @@ class UserSignin extends Component {
     .then(response => {this.setState({
       username: `${response.username}`,
       signedInAlert : `Signed into ${response.username}`,
-      user_id: response._id
+      user_id: response._id,
+      retrievedLatestRatings: false
     })})
   }
 
@@ -180,17 +185,6 @@ class UserSignin extends Component {
           key = {`SongCard${i}`}
         />
       );
-      // let songsTable = document.getElementById('songsTable');
-
-      // let newRow = songsTable.insertRow(-1);
-
-      // let songTitle = newRow.insertCell(0);
-      // let artist = newRow.insertCell(1);
-      // let songId = newRow.insertCell(2);
-
-      // songTitle.innerHTML = songInfo.title;
-      // artist.innerHTML = songInfo.artist;
-      // songId.innerHTML = songInfo._id;
     }
 
     let ratingsOnPage = [];
@@ -210,41 +204,55 @@ class UserSignin extends Component {
 
     return (
       <div>
-        <h3>Enter your Username and Email!</h3>
-        <input type="text" id="signinUsername" placeholder="Username"></input>
-        <input type="text" id="signinEmail" placeholder="Email"></input>
-        <button onClick = {this.signIn}>Sign In!</button>
-        <p>{this.state.signedInAlert}</p>
+        <Card id="signInCard">
+          <h4>Enter your Username and Password!</h4>
+          <input type="text" id="signinUsername" placeholder="Username"></input>
+          <input type="password" id="signinEmail" placeholder="Password"></input>
+          <Button variant="primary" id="signinButton" onClick = {this.signIn}>Sign In!</Button>
+          <p>{this.state.signedInAlert}</p>
+        </Card>
         
         <br></br>
         <hr></hr>
         <br></br>
 
-        <table>
+        <Table striped bordered hover id="songTable">
+          <thead>
+            <tr>
+              <th colSpan="3" style={{fontWeight: '700'}}>Songs List</th>
+            </tr>
+          </thead>
           <thead>
             <tr>
               <th style={{fontWeight: '600'}}>Song Title</th>
               <th style={{fontWeight: '600'}}>Artist</th>
               <th style={{fontWeight: '600'}}>Song ID</th>
             </tr>
-            {songsOnPage}
           </thead>
-        </table>
+          <tbody>
+            {songsOnPage}
+          </tbody>
+        </Table>
 
-        <h4>Add a rating</h4>
+        <p><u>Add a rating</u></p>
         <input type="text" id="rating" placeholder="Rating"></input>
         <input type="text" id="songId" placeholder="Song ID"></input>
-        <button onClick = {this.addRating}>Submit Rating</button>
-        <h4>Add a song to the database</h4>
+        <Button variant="outline-success" onClick = {this.addRating}>Submit Rating</Button>
+        <p><u>Add a song to the database</u></p>
         <input type="text" id="newTitle" placeholder="Title"></input>
         <input type="text" id="newArtist" placeholder="Artist"></input> 
-        <button onClick={this.addSong}>Add Song</button>
+        <Button variant="outline-success" onClick={this.addSong}>Add Song</Button>
 
         <br></br>
         <br></br>
         <br></br>
 
-        <table>
+        <Table striped bordered hover id="ratingTable">
+          <thead>
+            <tr>
+              <th colSpan="4" style={{fontWeight: '700'}}>Your Ratings</th>
+            </tr>
+          </thead>
           <thead>
             <tr>
               <th style={{fontWeight: '600'}}>Song Title</th>
@@ -252,17 +260,19 @@ class UserSignin extends Component {
               <th style={{fontWeight: '600'}}>Your Rating</th>
               <th style={{fontWeight: '600'}}>Rating ID</th>
             </tr>
-            {ratingsOnPage}
           </thead>
-        </table>
+          <tbody>
+            {ratingsOnPage}
+          </tbody>
+        </Table>
 
-        <h4>Update one of your ratings</h4>
+        <p><u>Update one of your ratings</u></p>
         <input type="text" id="newRating" placeholder="New Rating"></input>
         <input type="text" id="ratingIdToUpdate" placeholder="Rating ID"></input>
-        <button onClick={this.updateRating}>Update Rating</button>
-        <h4>Delete one of your ratings</h4>
+        <Button variant="outline-warning" onClick={this.updateRating}>Update Rating</Button>
+        <p><u>Delete one of your ratings</u></p>
         <input type="text" id="ratingToDel" placeholder="Rating ID"></input>
-        <button onClick={this.deleteRating}>Delete Rating</button>
+        <Button variant="outline-danger" onClick={this.deleteRating}>Delete Rating</Button>
       </div>
     );
   }

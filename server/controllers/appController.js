@@ -156,7 +156,8 @@ appController.getUserRatings = (req, res, next) => {
   FROM users
   LEFT OUTER JOIN ratings ON ratings.userid = users._id
   LEFT OUTER JOIN songs ON songs._id = songid
-  WHERE users._id = $1`
+  WHERE users._id = $1
+  ORDER BY rating_id`
 
   const values = [req.body.userId]; //will probably store user _id inside a cookie for easy access
 
@@ -203,7 +204,8 @@ appController.addSong = (req, res, next) => {
 /*Should occur after login. Will catalog to the user all
 songs availble for rating.*/
 appController.getSongs = (req, res, next) => {
-  const query = `SELECT * FROM songs`
+  const query = `SELECT * FROM songs
+  ORDER BY _id`
 
   async function retrSongs() {
     await db.query(query, null, (err, queryRes) => {
