@@ -10,7 +10,7 @@ class UserSignin extends Component {
     this.state = {
       signedInAlert : "",
       username: "",
-      user_id: "go fuck yourself",
+      user_id: null,
 
       retrievedLatestRatings: false,
       ratingCards : [],
@@ -22,11 +22,20 @@ class UserSignin extends Component {
     this.signIn = this.signIn.bind(this);
     this.getSongList = this.getSongList.bind(this);
     this.getUserRatingList = this.getUserRatingList.bind(this);
+    this.addRating = this.addRating.bind(this);
+    this.addSong = this.addSong.bind(this);
+    this.updateRating = this.updateRating.bind(this);
+    this.deleteRating = this.deleteRating.bind(this);
   }
 
   componentDidUpdate() {
-    if (this.state.user_id) {
-      console.log('We have a user _id now!!!: ', this.state.user_id);
+    console.log('we updated!');
+    if (this.state.user_id && !this.state.retrievedLatestSongs) {
+      this.getSongList();
+    }
+
+    if (this.state.user_id && !this.state.retrievedLatestRatings) {
+      this.getUserRatingList();
     }
   }
 
@@ -45,8 +54,8 @@ class UserSignin extends Component {
       signedInAlert : `Signed into ${response.username}`,
       user_id: response._id
     })})
-    .then(this.getSongList())
-    .then(this.getUserRatingList());
+    // .then(this.getSongList())
+    // .then(this.getUserRatingList());
   }
 
   getSongList() {
@@ -62,7 +71,7 @@ class UserSignin extends Component {
   }
 
   getUserRatingList() {
-    console.log(this.state.user_id);
+    // console.log(this.state.user_id);
     fetch('/api/getUserRatings/', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -75,6 +84,87 @@ class UserSignin extends Component {
       ratingCards : response,
       retrievedLatestRatings : true
     })});
+  }
+
+  addRating() {
+    try {
+      fetch('/api/addRating/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          "rating": document.getElementById('rating').value,
+          "userId": this.state.user_id,
+          "songId": document.getElementById('songId').value
+        })
+      })
+      .then(response => response.json())
+      .then(response => {this.setState({
+        retrievedLatestRatings: false
+      })})
+    } catch (err) {
+      console.log('Error occured when attempted request to POST rating. Are you signed in? Did you leave a paramater null?');
+      console.log(err);
+    }
+  }
+
+  addSong() {
+    try {
+      fetch('/api/addSong', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          "title": document.getElementById('newTitle').value,
+          "artist": document.getElementById('newArtist').value,
+          "releaseYear": 1000 //the releaseYear column is sorta useless now...w/e
+        })
+      })
+      .then(response => response.json())
+      .then(response => {this.setState({
+        retrievedLatestSongs: false
+      })})
+    } catch(err) {
+      console.log('Error occured when attempted request to POST song. Are you signed in? Did you leave a paramater null?')
+      console.log(err);
+    }
+  }
+
+  updateRating() {
+    try {
+      fetch('/api/updateRating', {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          newRating: document.getElementById('newRating').value,
+          ratingid: document.getElementById('ratingIdToUpdate').value,
+        })
+      })
+      .then(response => response.json())
+      .then(response => {this.setState({
+        retrievedLatestRatings: false
+      })})
+    } catch(err) {
+      console.log('Error occured when attempted request to PATCH rating. Are you signed in? Did you leave a paramater null?')
+      console.log(err);
+    }
+  }
+
+  deleteRating() {
+    try {
+      fetch('/api/deleteRating', {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          ratingId: document.getElementById('ratingToDel').value
+        })
+      })
+      .then(response => response.json())
+      .then(response => {this.setState({
+        retrievedLatestRatings: false
+      })})
+    } catch(err) {
+      console.log('Error occured when attempted request to DELETE rating. Are you signed in? Did you leave a paramater null?')
+      console.log(err);
+    }
   }
 
   render() {
@@ -123,12 +213,11 @@ class UserSignin extends Component {
         <h4>Add a rating</h4>
         <input type="text" id="rating" placeholder="Rating"></input>
         <input type="text" id="songId" placeholder="Song ID"></input>
-        <button id="submitRating">Submit Rating</button>
+        <button onClick = {this.addRating}>Submit Rating</button>
         <h4>Add a song to the database</h4>
         <input type="text" id="newTitle" placeholder="Title"></input>
-        <input type="text" id="newArtist" placeholder="Artist"></input>
-        <input type="text" id="newYear" placeholder="Year"></input>
-        <button id="updateRating">Add Song</button>
+        <input type="text" id="newArtist" placeholder="Artist"></input> 
+        <button onClick={this.addSong}>Add Song</button>
 
         <br></br>
         <br></br>
@@ -138,11 +227,11 @@ class UserSignin extends Component {
         {ratingsOnPage}
         <h4>Update one of your ratings</h4>
         <input type="text" id="newRating" placeholder="New Rating"></input>
-        <input type="text" id="ratingId" placeholder="Rating ID"></input>
-        <button id="updateRating">Update Rating</button>
+        <input type="text" id="ratingIdToUpdate" placeholder="Rating ID"></input>
+        <button onClick={this.updateRating}>Update Rating</button>
         <h4>Delete one of your ratings</h4>
         <input type="text" id="ratingToDel" placeholder="Rating ID"></input>
-        <button id="updateRating">Delete Rating</button>
+        <button onClick={this.deleteRating}>Delete Rating</button>
       </div>
     );
   }
