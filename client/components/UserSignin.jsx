@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import SongCard from './SongCard.jsx'
 import RatingCard from './RatingCard.jsx'
 
+import '../styles.css';
+
 class UserSignin extends Component {
   constructor(props) {
     super(props);
@@ -54,8 +56,6 @@ class UserSignin extends Component {
       signedInAlert : `Signed into ${response.username}`,
       user_id: response._id
     })})
-    // .then(this.getSongList())
-    // .then(this.getUserRatingList());
   }
 
   getSongList() {
@@ -180,6 +180,17 @@ class UserSignin extends Component {
           key = {`SongCard${i}`}
         />
       );
+      // let songsTable = document.getElementById('songsTable');
+
+      // let newRow = songsTable.insertRow(-1);
+
+      // let songTitle = newRow.insertCell(0);
+      // let artist = newRow.insertCell(1);
+      // let songId = newRow.insertCell(2);
+
+      // songTitle.innerHTML = songInfo.title;
+      // artist.innerHTML = songInfo.artist;
+      // songId.innerHTML = songInfo._id;
     }
 
     let ratingsOnPage = [];
@@ -207,9 +218,19 @@ class UserSignin extends Component {
         
         <br></br>
         <hr></hr>
+        <br></br>
 
-        <u><SongCard songTitle = "Song Title" artist = "Artist" songId = "Song ID"/></u>
-        {songsOnPage}
+        <table>
+          <thead>
+            <tr>
+              <th style={{fontWeight: '600'}}>Song Title</th>
+              <th style={{fontWeight: '600'}}>Artist</th>
+              <th style={{fontWeight: '600'}}>Song ID</th>
+            </tr>
+            {songsOnPage}
+          </thead>
+        </table>
+
         <h4>Add a rating</h4>
         <input type="text" id="rating" placeholder="Rating"></input>
         <input type="text" id="songId" placeholder="Song ID"></input>
@@ -223,8 +244,18 @@ class UserSignin extends Component {
         <br></br>
         <br></br>
 
-        <u><RatingCard songTitle = "Song Title" artist = "Artist" rating = "Your Rating" ratingId = "Rating ID"/></u>
-        {ratingsOnPage}
+        <table>
+          <thead>
+            <tr>
+              <th style={{fontWeight: '600'}}>Song Title</th>
+              <th style={{fontWeight: '600'}}>Artist</th>
+              <th style={{fontWeight: '600'}}>Your Rating</th>
+              <th style={{fontWeight: '600'}}>Rating ID</th>
+            </tr>
+            {ratingsOnPage}
+          </thead>
+        </table>
+
         <h4>Update one of your ratings</h4>
         <input type="text" id="newRating" placeholder="New Rating"></input>
         <input type="text" id="ratingIdToUpdate" placeholder="Rating ID"></input>

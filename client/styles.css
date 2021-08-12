@@ -1,5 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+table {
+  border: 1px solid black;
+  width: 50%;
+}
 
-html {
-  font-family: 'Open Sans', sans-serif;
+th {
+  border: 1px solid black;
+  width: 1fr;
+  font-weight: 400;
 }
