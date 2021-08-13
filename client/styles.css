@@ -1,19 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
 
+body {
+  /* background-color:rgb(255, 255, 255); */
+}
+
 html {
   font-family: 'Padauk', sans-serif;
   margin-left: 6px;
 }
 
+h1 {
+  color: #c572d4;
+}
+
 #songTable, #ratingTable {
   width: 50%;
   margin-bottom: 5px;
-  box-shadow: 0px 0px 4px rgb(110, 110, 110);
+  box-shadow: 0px 0px 3px rgb(110, 110, 110);
+  /* rgb(110, 110, 110); */
+  /* #c572d4; */
 }
 
 #signInCard {
   width:26%;
-  box-shadow: 0px 0px 3px rgb(117, 117, 117);
+  box-shadow: 0px 0px 4px #c572d4;
+  /* rgb(117, 117, 117); */
 }
 
 #signinUsername, #signinEmail, #signinButton {
